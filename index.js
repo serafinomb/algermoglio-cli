@@ -36,4 +36,4 @@ getHomepage().then(html => {
   table.push(...menu);
 
   console.log(table.toString());
-});
+}).catch(error => console.error(error.message));
