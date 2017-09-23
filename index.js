@@ -21,18 +21,19 @@ getHomepage().then(html => {
     .contents()
     .map((i, element) => $(element).text())
     .get()
-    .map(text => text.trim());
+    .map(item => {
+      const match = item.trim().match(/^(.+) (\d,\d\d)$/i);
 
-  const richMenu = menu.map(item => {
-    const match = item.match(/^(.+) (\d,\d\d)$/i);
-    return match ? [match[1], match[2]] : [item, ''];
-  });
+      return match
+        ? [match[1], match[2]]
+        : [item, ''];
+    });
 
   const table = new Table({
     head: ['Oggi abbiamo preparato', '€']
   });
 
-  table.push(...richMenu);
+  table.push(...menu);
 
   console.log(table.toString());
 });
